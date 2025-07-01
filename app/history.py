@@ -8,6 +8,7 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from app.calculation import Calculation
+from app.logger import CalculationLogger
 
 
 class HistoryObserver(ABC):
@@ -25,6 +26,18 @@ class LoggingObserver(HistoryObserver):
 
     ## Non-abstract class for logging calculations
 
+    def __init__(self) -> None:
+
+        ## Initializes the LoggingObserver
+
+        ## Params:
+        ## None
+
+        ## Returns:
+        ## None
+
+        self.logger = CalculationLogger()
+
     def update(self, calculation: Calculation) -> None:
 
         ## Logs the calculation to the console
@@ -37,9 +50,10 @@ class LoggingObserver(HistoryObserver):
 
         if calculation is None:
 
-            raise AttributeError("Calculation cannot be None")
+            self.logger.log_error("Calculation cannot be None")
+            raise AttributeError
         
-        pass ## TODO: logging. Output the proper result
+        self.logger.log_info(calculation)
 
 def AutoSaveObserver(HistoryObserver):
 
@@ -54,12 +68,14 @@ def AutoSaveObserver(HistoryObserver):
 
         ## Returns:
         ## None
+        self.logger = CalculationLogger()
 
         if not hasattr(calculator, 'config') or not hasattr(calculator, 'save_history'):
 
             ## Check if the calculator has a config and save_history method
 
-            raise TypeError("Calculator must have a config and save_history method")
+            self.logger.log_error("Calculator must have a config and save_history method")
+            raise TypeError
         
         self.calculator = calculator
 
@@ -76,10 +92,11 @@ def AutoSaveObserver(HistoryObserver):
 
         if calculation is None:
 
-            raise AttributeError("Calculation cannot be None")
+            self.logger.log_error("Calculation cannot be None")
+            raise AttributeError
         
         if self.calculator.config.auto_save:
 
             self.calculator.save_history()
 
-            pass ## TODO: logging. report the history is auto saved
+            self.logger.log_info(f"History saved: {calculation}")
