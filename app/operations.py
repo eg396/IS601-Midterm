@@ -308,21 +308,6 @@ class PercentageCalculation(Operation):
     ## PercentageCalculation class
     ## For finding the percentage of one number with respect to another
 
-    def validate(self, num1: Decimal, num2: Decimal) -> None:
-        
-        ## Validates the percentage calculation (i.e. is the divisor 0?)
-
-        ## Params:
-        ## Num1: decimal
-        ## Num2: decimal
-
-        ## Returns:
-        ## Exception: ValidationError (as we defined in exceptions.py)
-
-        super().validate(num1, num2)
-        if num2 == 0:
-            raise exceptions.CalculationError("Cannot divide by zero")
-
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
         ## Executes the percentage calculation
