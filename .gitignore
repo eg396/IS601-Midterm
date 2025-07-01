@@ -1,0 +1,8 @@
+## .gitignore
+## IS 601 Midterm
+## Evan Garvey
+
+## Ignore venv. The user must implement themselves
+
+venv/
+
