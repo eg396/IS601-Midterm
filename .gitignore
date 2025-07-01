@@ -6,3 +6,6 @@
 
 venv/
 
+## Ignore .env as that is good practice
+
+.env
