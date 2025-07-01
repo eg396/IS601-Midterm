@@ -212,8 +212,14 @@ class Root(Operation):
         ## Exception: ValidationError (as we defined in exceptions.py)
 
         super().validate(num1, num2)
-        if num1 < 0:
-            raise exceptions.CalculationError("Cannot take the nth root of a negative number")
+
+        if num1 <= 0:
+
+            raise exceptions.CalculationError("Cannot take the root of a number less than or equal to zero")
+        
+        if num2 == 0:
+    
+            raise exceptions.CalculationError("Cannot take the zeroth root of a number")
         
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
