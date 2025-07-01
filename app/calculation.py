@@ -5,6 +5,8 @@
 from dataclasses import dataclass, field
 import datetime
 from decimal import Decimal, InvalidOperation
+import logging
+from typing import Any, Dict
 
 from app.exceptions import OperationError
 
@@ -155,3 +157,140 @@ class Calculation:
             raise OperationError("Cannot take the zeroth root of a number")
         
         raise OperationError("Invalid root operation")
+    
+    @staticmethod
+    def to_dict(self) -> Dict[str, Any]:
+
+        ## Converts the calculation to a dictionary for serialization
+
+        ## Params:
+        ## None
+
+        ## Returns:
+        ## Dict[str, Any]: The calculation as a dictionary
+
+        return {
+            'operation': self.operation,
+            'num1': self.num1,
+            'num2': self.num2,
+            'result': str(self.result),
+            'timestamp': self.timestamp.isoformat()
+        }
+    
+    @staticmethod
+    def from_dict(data: Dict[str, Any]) -> 'Calculation':
+
+        ## Converts the dictionary into a calculation object
+
+        ## Params:
+        ## Data: dict
+
+        ## Returns:
+        ## Calculation: The calculation
+
+        ## First we get the base calculation data
+
+        try: 
+
+            output = Calculation(
+                operation=data['operation'],
+                num1=Decimal(data['num1']),
+                num2=Decimal(data['num2']),
+            )
+
+            saved_result = Decimal(data['result'])
+            if output.result != saved_result:
+
+                pass  ## TODO: logging
+
+            output.timestamp = datetime.fromisoformat(data['timestamp'])
+
+            return output
+        
+        except (KeyError, InvalidOperation, ValueError) as e:
+
+            ## If any errors occur, we catch them and pass the error
+
+            raise OperationError(f"Invalid calculation data: {str(e)}")
+        
+    def __str__(self) -> str:
+
+        ## Returns a string representation of the calculation
+
+        ## Params:
+        ## None
+
+        ## Returns:
+        ## String: The string representation of the calculation
+
+        return f"{self.num1} {self.operation} {self.num2} = {self.result}"
+    
+    def __repr__(self) -> str:
+
+        ## Returns a string representation of the calculation
+
+        ## Params:
+        ## None
+
+        ## Returns:
+        ## String: The string representation of the calculation
+
+        return (
+
+            f"num1='{self.num1}', "
+            f"operation='{self.operation}', "
+            f"num2='{self.num2}', "
+            f"result='{self.result}', "
+            f"timestamp='{self.timestamp}'"
+
+        )
+    
+    def __eq__(self, other: object) -> bool:
+
+        ## Determines the equality of two calculations
+
+        ## Params:
+        ## Other: object
+
+        ## Returns:
+        ## Boolean: True if the calculations are equal, False otherwise
+
+        if not isinstance(other, Calculation):
+
+            return NotImplemented
+
+        ## Crucially we do not check the timestamp as two of the same calculation may have different timestamps
+
+        return (
+
+            self.num1 == other.num1 and
+            self.operation == other.operation and
+            self.num2 == other.num2 and
+            self.result == other.result
+
+        )
+    
+    def format_result(self, precision: int = 10) -> str:
+
+        ## Formats the result of the calculation
+
+        ## Params:
+        ## Precision: int (default: 10)
+
+        ## Returns:
+        ## String: The formatted result of the calculation
+
+        try:
+
+            ## attempts to format the result to the specified precision
+            ## extra zeroes are removed
+
+            return str (self.result.normalize().quantize(
+                Decimal('0.' + '0' * precision)
+                ).normalize())
+
+        except InvalidOperation:
+
+            ## if formatting throws an error, we just return the result
+
+            return str(self.result)
