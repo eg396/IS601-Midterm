@@ -25,7 +25,7 @@ class ValidationError(CalculatorError):
 
     pass
 
-class CalculationError(CalculatorError):
+class OperationError(CalculatorError):
 
     ## CalculationError exception class. For when the calculation cannot be completed
     ## Only raised during calculation.
