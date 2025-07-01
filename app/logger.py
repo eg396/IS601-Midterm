@@ -36,12 +36,6 @@ class CalculationLogger(CalculatorLogger):
         self.log_file = config.log_file
         logging.basicConfig(filename=self.log_file, filemode='w', level=logging.INFO)
 
-
-    def _get_log_file_name(self) -> str:
-
-        config = CalculatorConfig()
-        return config.log_file
-    
     def _log(self, level: int, message: str) -> None:
 
         logging.log(level, message)
