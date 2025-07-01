@@ -4,6 +4,7 @@
 
 from abc import ABC, abstractmethod
 from decimal import Decimal
+from typing import Dict
 from app import exceptions
 
 class Operation(ABC):
@@ -39,6 +40,9 @@ class Operation(ABC):
         ## Num2: decimal
 
         ## Returns:
+        ## None
+
+        ## Raises:
         ## Exception: ValidationError (as we defined in exceptions.py)
 
         ## Still no implementation here
@@ -347,3 +351,71 @@ class AbsoluteDifference(Operation):
 
         self.validate(num1, num2)
         return abs(num1 - num2)
+    
+class OperationFactory:
+
+    ## OperationFactory class
+    ## For creating Operation objects
+    ## This follows the Factory Pattern
+
+    ## First, a dictionary is needed for mapping all of our created methods
+
+    _operations: Dict[str, type] = {
+        "add": Addition,
+        "subtract": Subtraction,
+        "multiply": Multiplication,
+        "divide": Division,
+        "root": Root,
+        "modulo": Modulo,
+        "integer division": IntegerDivision,
+        "percentage calculation": PercentageCalculation,
+        "absolute difference": AbsoluteDifference
+    }
+
+    @classmethod
+    def create(cls, operation_type: str) -> Operation:
+        
+        ## Creates an Operation object
+
+        ## Params:
+        ## Operation: string
+
+        ## Returns:
+        ## Operation: The created Operation object
+
+        ## Raises:
+        ## Exception: ValueError
+
+        operation = cls._operations.get(operation_type.lower())
+
+        ## If the operation is not found, raise an error
+        ## This error will report what kind of operation was requested
+
+        if not operation:
+
+            raise ValueError(f"Invalid operation type: {operation_type}")
+        
+        return operation(
+            
+        )
+    
+    @classmethod
+    def register(cls, name: str, operation_type: type) -> None:
+        
+        ## Registers an Operation object
+
+        ## Params:
+        ## name: string
+        ## operation_type: type
+
+        ## Returns:
+        ## None
+
+        ## Raises:
+        ## Exception: TypeError
+
+        if not issubclass(operation_type, Operation):
+
+            raise TypeError(f"{operation_type} is not a subclass of Operation")
+        
+        cls._operations[name.lower()] = operation_type
