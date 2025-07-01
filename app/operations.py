@@ -371,6 +371,7 @@ class OperationFactory:
         "subtract": Subtraction,
         "multiply": Multiplication,
         "divide": Division,
+        "power": Power,
         "root": Root,
         "modulo": Modulo,
         "integer division": IntegerDivision,
