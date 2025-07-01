@@ -8,6 +8,7 @@ from numbers import Number
 import os
 from pathlib import Path
 from typing import Optional
+from app.exceptions import ConfigurationError
 from dotenv import load_dotenv
 
 ## Before we start we must load the dotenv
@@ -177,3 +178,27 @@ class CalculatorConfig:
             str(self.history_dir / 'calculator_history.csv')
         )).resolve()
     
+    def validate(self) -> None:
+        
+        ## Validate the config settings
+
+        ## Params:
+        ## None
+
+        ## Returns:
+        ## None
+
+        ## Raises:
+        ## Exception: ConfigurationError
+
+        if self.max_history <= 0:
+
+            raise ConfigurationError("Max history must be greater than 0")
+
+        if self.precision <= 0:
+
+            raise ConfigurationError("Precision must be greater than 0")
+
+        if self.max_input_val <= 0:
+
+            raise ConfigurationError("Max input value must be greater than 0")
