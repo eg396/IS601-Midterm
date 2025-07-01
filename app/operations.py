@@ -178,8 +178,8 @@ class Power(Operation):
         ## Exception: ValidationError (as we defined in exceptions.py)
 
         super().validate(num1, num2)
-        if num2 < 0:
-            raise exceptions.CalculationError("Cannot raise to a negative power")
+        if num1 == 0 and num2 < 0:
+            raise exceptions.CalculationError("Cannot raise zero to a negative power")
 
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
