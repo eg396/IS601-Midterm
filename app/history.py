@@ -5,6 +5,7 @@
 
 
 from abc import ABC, abstractmethod
+import logging
 from typing import Any
 
 from app.calculation import Calculation
@@ -26,19 +27,19 @@ class LoggingObserver(HistoryObserver):
 
     ## Non-abstract class for logging calculations
 
-    def __init__(self) -> None:
+    def __init__(self, logger: CalculationLogger):
 
         ## Initializes the LoggingObserver
 
         ## Params:
-        ## None
+        ## Logger: The logger object
 
         ## Returns:
         ## None
 
-        self.logger = CalculationLogger()
+        self.logger = logger
 
-    def update(self, calculation: Calculation) -> None:
+    def update_calculation(self, calculation: Calculation) -> None:
 
         ## Logs the calculation to the console
 
@@ -55,11 +56,29 @@ class LoggingObserver(HistoryObserver):
         
         self.logger.log_info(calculation)
 
-def AutoSaveObserver(HistoryObserver):
+    def update_message(self, level: int, message: str) -> None:
+
+        if level == logging.INFO:
+
+            self.logger.log_info(message)
+
+        elif level == logging.WARNING:
+
+            self.logger.log_warning(message)
+
+        elif level == logging.ERROR:
+
+            self.logger.log_error(message)
+
+        else:
+
+            self.logger.log_error(f"Invalid level: {level}")
+
+class AutoSaveObserver(HistoryObserver):
 
     ## Non-abstract class for saving calculations
-
-    def __init__(self, calculator: Any):
+    
+    def __init__(self, logger: CalculationLogger, calculator: Any):
 
         ## Initializes the AutoSaveObserver
 
@@ -68,13 +87,13 @@ def AutoSaveObserver(HistoryObserver):
 
         ## Returns:
         ## None
-        self.logger = CalculationLogger()
+        logger = CalculationLogger()
 
         if not hasattr(calculator, 'config') or not hasattr(calculator, 'save_history'):
 
             ## Check if the calculator has a config and save_history method
 
-            self.logger.log_error("Calculator must have a config and save_history method")
+            logger.log_error("Calculator must have a config and save_history method")
             raise TypeError
         
         self.calculator = calculator
@@ -92,7 +111,7 @@ def AutoSaveObserver(HistoryObserver):
 
         if calculation is None:
 
-            self.logger.log_error("Calculation cannot be None")
+            self.logger.log_error(f"Calculation cannot be None")
             raise AttributeError
         
         if self.calculator.config.auto_save:

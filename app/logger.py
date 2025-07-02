@@ -6,7 +6,6 @@ from abc import ABC, abstractmethod
 import logging
 from app.calculator_config import CalculatorConfig
 
-
 class CalculatorLogger(ABC):
 
     ## abstract class for a logger
@@ -54,16 +53,18 @@ class CalculatorLogger(ABC):
 
         pass # pragma: no cover
 
+    @abstractmethod
+    def setup_logging(self):
+
+        pass # pragma: no cover
+
 class CalculationLogger(CalculatorLogger):
 
     ## non-abstract class for a calculation logger.
     ## This will handle any logs related to calculation info, warnings, and errors.
     ## History will be handled separately.
-
-    def __init__(self) -> None:
-
-        ## init method for the calculation logger
-        ## this grabs the log file from the config and sets up logging
+        
+    def setup_logging(self):
 
         config = CalculatorConfig()
         self.log_file = config.log_file
@@ -74,15 +75,28 @@ class CalculationLogger(CalculatorLogger):
 
             raise Exception("No log file specified in config")
 
-        try: 
+        try:
 
-            ## try to initialize logging
-
-            logging.basicConfig(filename=self.log_file, filemode='w', level=logging.INFO)
+            logging.basicConfig(
+                filename=str(self.log_file),
+                level=logging.INFO,
+                format='%(asctime)s - %(levelname)s - %(message)s',
+                force=True  # Overwrite any existing logging configuration
+            )
+            logging.info(f"Logging initialized at: {self.log_file}")
 
         except Exception as e:
 
             ## if there is an error at this point, raise an exception
+            ## and use a fallback console logger
+
+            logging.basicConfig(
+                level=logging.WARNING,
+                format='%(asctime)s - [FALLBACK] %(levelname)s - %(message)s',
+                force=True
+            )
+            logging.warning("Failed to configure file logging. Using fallback console logger.")
+            logging.exception(e)
 
             raise Exception(f"Could not initialize logger: {e}")
 
