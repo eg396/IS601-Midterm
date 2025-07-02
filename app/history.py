@@ -7,6 +7,7 @@
 from abc import ABC, abstractmethod
 import logging
 from typing import Any
+import pandas as pd
 
 from app.calculation import Calculation
 from app.logger import CalculationLogger
@@ -19,7 +20,13 @@ class HistoryObserver(ABC):
     @abstractmethod
     def update(self, calculation: Calculation) -> None:
 
-        ## Abstract method for updating the history with a new calculation
+        ## Abstract method for updating the log with a new calculation. Non optional
+        
+        pass # pragma: no cover
+
+    def update_message(self, level: int, message: str) -> None:
+
+        ## Optionally overrideable method for updating the log with a new message
         
         pass # pragma: no cover
 
@@ -39,7 +46,7 @@ class LoggingObserver(HistoryObserver):
 
         self.logger = logger
 
-    def update_calculation(self, calculation: Calculation) -> None:
+    def update(self, calculation: Calculation) -> None:
 
         ## Logs the calculation to the console
 
@@ -51,10 +58,14 @@ class LoggingObserver(HistoryObserver):
 
         if calculation is None:
 
-            self.logger.log_error("Calculation cannot be None")
+            self.logger.log_error(f"Calculation cannot be None")
             raise AttributeError
         
-        self.logger.log_info(calculation)
+        self.logger.log_info(
+            f"History updated: {calculation.operation},"
+            f"{calculation.num1}, {calculation.num2} ="
+            f"{calculation.result}"
+        )
 
     def update_message(self, level: int, message: str) -> None:
 
@@ -77,26 +88,11 @@ class LoggingObserver(HistoryObserver):
 class AutoSaveObserver(HistoryObserver):
 
     ## Non-abstract class for saving calculations
-    
-    def __init__(self, logger: CalculationLogger, calculator: Any):
 
-        ## Initializes the AutoSaveObserver
+    def __init__(self, csv_path: str):
 
-        ## Params:
-        ## Calculator: The calculator object
-
-        ## Returns:
-        ## None
-        logger = CalculationLogger()
-
-        if not hasattr(calculator, 'config') or not hasattr(calculator, 'save_history'):
-
-            ## Check if the calculator has a config and save_history method
-
-            logger.log_error("Calculator must have a config and save_history method")
-            raise TypeError
-        
-        self.calculator = calculator
+         self.csv_path = csv_path
+         self.df = pd.DataFrame(columns=["operation", "num1", "num2", "result", "timestamp"])
 
     def update(self, calculation: Calculation) -> None:
 
@@ -111,11 +107,22 @@ class AutoSaveObserver(HistoryObserver):
 
         if calculation is None:
 
-            self.logger.log_error(f"Calculation cannot be None")
-            raise AttributeError
-        
-        if self.calculator.config.auto_save:
+            ## This doesn't need to be logged as it will run in parallel with the other observer, which will log
 
-            self.calculator.save_history()
+            raise AttributeError("Calculation cannot be None")
 
-            self.logger.log_info(f"History saved: {calculation}")
+        ## Append the calculation to the dataframe
+
+        new_row = pd.DataFrame([{
+            "operation": calculation.operation,
+            "num1": calculation.num1,
+            "num2": calculation.num2,
+            "result": calculation.result,
+            "timestamp": calculation.timestamp
+        }])
+
+        self.df = pd.concat([self.df, new_row], ignore_index=True)
+
+        ## Save the dataframe to the file
+
+        self.df.to_csv(self.csv_path, index=False)
