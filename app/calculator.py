@@ -10,7 +10,9 @@ from typing import List, Optional, Union
 from app.calculation import Calculation
 from app.calculator_config import CalculatorConfig
 from app.calculator_memento import CalculatorMemento
+from app.exceptions import OperationError, ValidationError
 from app.history import HistoryObserver, LoggingObserver
+from app.input_validators import InputValidator
 from app.logger import CalculationLogger
 from app.operations import Operation
 
@@ -49,7 +51,7 @@ class Calculator:
 
         os.makedirs(self.config.log_dir, exist_ok = True)
 
-        self._setup_logging()  
+        self._setup_logging()
 
         self.history = List[Calculation] = []
         self.operation_strategy: Optional[Operation] = None
@@ -67,21 +69,103 @@ class Calculator:
 
         except Exception as e:
 
-            print(f"Error loading history: {e}")
+            ## Update logging observer with error
 
-        def _setup_logging(self):
+            self._send_message(40, f"Error loading history: {e}")
 
-            try:
+        self._send_message(20, f"Calculator initialized at: {self.config.root_dir}")
 
-                os.makedirs(self.config.log_dir, exist_ok = True)
-                log_file = self.config.log_file.resolve()
+    def _setup_logging(self):
 
-                logger = LoggingObserver(CalculationLogger())
-                logger.update_message(20, f"Logging initialized at: {log_file}")
+        try:
 
-                self.observers.append(logger)
+            os.makedirs(self.config.log_dir, exist_ok = True)
+            log_file = self.config.log_file.resolve()
 
-            except Exception as e:
+            logger = LoggingObserver(CalculationLogger())
+            logger.update_message(20, f"Logging initialized at: {log_file}")
 
-                print(f"Error setting up logging: {e}")
-                raise
+            self.observers.append(logger)
+
+        except Exception as e:
+
+            print(f"Error setting up logging: {e}")
+            raise
+
+    def _send_message(self, level: int, message: str) -> None:
+
+        for i in self.observers:
+
+            i.update_message(level, message)
+
+    def _send_calculation(self, calculation: Calculation) -> None:
+
+        for i in self.observers:
+
+            i.update(calculation)
+
+    def _setup_directories(self) -> None:
+
+        self.config.history_dir.mkdir(parents = True, exist_ok = True)
+
+    def add_observer(self, observer: HistoryObserver) -> None:
+
+        self.observers.append(observer)
+        self._send_message(20, f"Added observer: {observer.__class__.__name__}")
+
+    def remove_observer(self, observer: HistoryObserver) -> None:
+
+        self.observers.remove(observer)
+        self._send_message(20, f"Removed observer: {observer.__class__.__name__}")
+
+    def notify_observers(self, calculation: Calculation) -> None:
+
+        self._send_calculation(calculation)
+
+    def set_operation(self, operation: Operation) -> None:
+
+        self.operation_strategy = operation
+        self._send_message(20, f"Operation set to: {operation}")
+
+    def perform_calculation(self, str1: Union[str, Number], str2: Union[str, Number]) -> CalculationResult:
+
+        if self.operation_strategy is None:
+
+            raise OperationError("No operation set")
+            
+        try:
+
+            validated_str1 = InputValidator.validate_input(str1, self.config)
+            validated_str2 = InputValidator.validate_input(str2, self.config)
+
+            result = self.operation_strategy.execute(validated_str1, validated_str2)
+
+            calculation = Calculation(
+                operation = str(self.operation_strategy),
+                num1 = validated_str1,
+                num2 = validated_str2,
+            )
+
+            self.undo_stack.append(CalculatorMemento(self.history.copy()))
+
+            self.redo_stack.clear()
+
+            self.history.append(calculation)
+
+            if len(self.history) > self.config.max_history:
+
+                self.history.pop(0)
+
+            self.notify_observers(calculation)
+
+            return result
+            
+        except ValidationError as e:
+
+            self._send_message(40, f"Validation Error: {e}")
+
+        except Exception as e:
+
+            self._send_message(40, f"Operation Failed: {e}")
+
+    
