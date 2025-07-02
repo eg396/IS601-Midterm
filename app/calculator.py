@@ -6,6 +6,7 @@ from decimal import Decimal
 import os
 from pathlib import Path
 from typing import List, Optional, Union
+import pandas as pd
 
 from app.calculation import Calculation
 from app.calculator_config import CalculatorConfig
@@ -127,7 +128,7 @@ class Calculator:
         self.operation_strategy = operation
         self._send_message(20, f"Operation set to: {operation}")
 
-    def perform_calculation(self, str1: Union[str, Number], str2: Union[str, Number]) -> CalculationResult:
+    def perform_operation(self, str1: Union[str, Number], str2: Union[str, Number]) -> CalculationResult:
 
         if self.operation_strategy is None:
 
@@ -168,4 +169,89 @@ class Calculator:
 
             self._send_message(40, f"Operation Failed: {e}")
 
-    
+    def save_history(self) -> None:
+
+        try:
+
+            self.config.history_dir.mkdir(parents = True, exist_ok = True)
+
+            history_data = []
+
+            for calc in self.history:
+
+                history_data.append({
+                    'operation': str(calc.operation),
+                    'num1': str(calc.num1),
+                    'num2': str(calc.num2),
+                    'result': str(calc.result),
+                    'timestamp': calc.timestamp.isoformat()
+                })
+
+            if history_data:
+
+                df = pd.Dataframe(history_data)
+                df.to_csv(self.config.history_file, index = False)
+
+                self._send_message(20, f"History saved to: {self.config.history_file}")
+
+            else:
+
+                pd.DataFrame(columns = [
+                    'operation', 'num1', 'num2', 'result', 'timestamp'
+                    ]).to_csv(self.config.history_file, index = False)
+                self._send_message(20, f"Empty history saved to: {self.config.history_file}")
+
+        except Exception as e:
+
+            self._send_message(40, f"Error saving history: {e}")
+            raise OperationError(f"Error saving history: {e}")
+        
+    def load_history(self) -> None:
+
+        try:
+
+            if self.config.history_file.exists():
+
+                df = pd.read_csv(self.config.history_file)
+                if not df.empty:
+
+                    self.history = [
+                        Calculation.from_dict({
+                            'operation': row['operation'],
+                            'num1': row['num1'],
+                            'num2': row['num2'],
+                            'result': row['result'],
+                            'timestamp': row['timestamp']
+                        })
+                        for _, row in df.iterrows()
+                    ]
+
+                    self._send_message(20, f"Loaded {len(self.history)} calculations from history file")
+
+                else:
+
+                    self._send_message(20, f"Loaded empty history file")
+
+            else:
+
+                self._send_message(20, f"No history file found - starting with empty history")
+
+        except Exception as e:
+
+            self._send_message(40, f"Error loading history: {e}")
+            raise OperationError(f"Error loading history: {e}")
+        
+    def get_history_dataframe(self) -> pd.DataFrame:
+
+        history_data = []
+        for calc in self.history:
+
+            history_data.append({
+                'operation': str(calc.operation),
+                'num1': str(calc.num1),
+                'num2': str(calc.num2),
+                'result': str(calc.result),
+                'timestamp': calc.timestamp
+            })
+
+        return pd.DataFrame(history_data)
