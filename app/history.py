@@ -58,15 +58,15 @@ class LoggingObserver(HistoryObserver):
 
     def update_message(self, level: int, message: str) -> None:
 
-        if level == logging.INFO:
+        if level == 20:
 
             self.logger.log_info(message)
 
-        elif level == logging.WARNING:
+        elif level == 30:
 
             self.logger.log_warning(message)
 
-        elif level == logging.ERROR:
+        elif level == 40:
 
             self.logger.log_error(message)
 
