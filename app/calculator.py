@@ -255,3 +255,40 @@ class Calculator:
             })
 
         return pd.DataFrame(history_data)
+    
+    def show_history(self) -> List[str]:
+
+        return [ 
+            f"{calc.operation} ({calc.num1}m {calc.num2}) = {calc.result}" for calc in self.history
+        ]
+    
+    def clear_history(self) -> None:
+
+        self.history.clear()
+        self.redo_stack.clear()
+        self.undo_stack.clear()
+        self._send_message(20, f"History cleared")
+
+    def undo(self) -> bool:
+
+        if not self.undo_stack:
+
+            return False
+        
+        memento = self.undo_stack.pop()
+        self.redo_stack.append(CalculatorMemento(self.history.copy()))
+        self.history = memento.history.copy()
+        
+        return True
+    
+    def redo(self) -> bool:
+
+        if not self.redo_stack:
+
+            return False
+        
+        memento = self.redo_stack.pop()
+        self.undo_stack.append(CalculatorMemento(self.history.copy()))
+        self.history = memento.history.copy()
+        
+        return True
