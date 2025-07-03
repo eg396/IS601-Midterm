@@ -145,7 +145,7 @@ class Division(Operation):
 
         super().validate(num1, num2)
         if num2 == 0:
-            raise exceptions.CalculationError("Cannot divide by zero")
+            raise exceptions.ValidationError("Cannot divide by zero")
         
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
@@ -179,7 +179,7 @@ class Power(Operation):
 
         super().validate(num1, num2)
         if num1 == 0 and num2 < 0:
-            raise exceptions.CalculationError("Cannot raise zero to a negative power")
+            raise exceptions.ValidationError("Cannot raise zero to a negative power")
 
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
@@ -215,11 +215,11 @@ class Root(Operation):
 
         if num1 <= 0:
 
-            raise exceptions.CalculationError("Cannot take the root of a number less than or equal to zero")
+            raise exceptions.ValidationError("Cannot take the root of a number less than or equal to zero")
         
         if num2 == 0:
     
-            raise exceptions.CalculationError("Cannot take the zeroth root of a number")
+            raise exceptions.ValidationError("Cannot take the zeroth root of a number")
         
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
@@ -253,7 +253,7 @@ class Modulo(Operation):
 
         super().validate(num1, num2)
         if num2 == 0:
-            raise exceptions.CalculationError("Cannot divide by zero")
+            raise exceptions.ValidationError("Cannot divide by zero")
 
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
@@ -287,7 +287,7 @@ class IntegerDivision(Operation):
 
         super().validate(num1, num2)
         if num2 == 0:
-            raise exceptions.CalculationError("Cannot divide by zero")
+            raise exceptions.ValidationError("Cannot divide by zero")
 
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
@@ -320,7 +320,11 @@ class PercentageCalculation(Operation):
         ## Decimal: The result of the percentage calculation
 
         self.validate(num1, num2)
-        return num1 * (num2 / 100)
+        if num2 == 0:
+
+            raise exceptions.ValidationError("Cannot divide by zero")
+        
+        return ((num1 / num2) * 100)
     
 class AbsoluteDifference(Operation):
 
@@ -408,6 +412,6 @@ class OperationFactory:
 
         if not issubclass(operation_type, Operation):
 
-            raise TypeError(f"{operation_type} is not a subclass of Operation")
+            raise TypeError("Registering operation class is not a subclass of Operation")
         
         cls._operations[name.lower()] = operation_type
