@@ -9,3 +9,7 @@ venv/
 ## Ignore .env as that is good practice
 
 .env
+
+## Ignore log as that shouldn't be shared
+
+calculator.log
