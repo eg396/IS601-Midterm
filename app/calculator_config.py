@@ -172,12 +172,16 @@ class CalculatorConfig:
 
         ## Returns:
         ## Path: The history file path
+        env_path = os.getenv('CALCULATOR_HISTORY_FILE')
 
-        return Path(os.getenv(
-            'CALCULATOR_HISTORY_FILE',
-            str(self.history_dir / 'calculator_history.csv')
-        )).resolve()
-    
+        if env_path:
+            try:
+                return Path(env_path).resolve()
+            except Exception as e:
+                raise ValueError(f"Invalid CALCULATOR_HISTORY_FILE path: {env_path}") from e
+
+        return (self.history_dir / 'calculator_history.csv').resolve()
+
     def validate(self) -> None:
         
         ## Validate the config settings
@@ -202,3 +206,14 @@ class CalculatorConfig:
         if self.max_input_val <= 0:
 
             raise ConfigurationError("Max input value must be greater than 0")
+        
+
+
+"""
+
+        return Path(os.getenv(
+            'CALCULATOR_HISTORY_FILE',
+            str(self.history_dir / 'calculator_history.csv')
+        )).resolve()
+    
+"""

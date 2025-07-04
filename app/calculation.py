@@ -86,6 +86,7 @@ class Calculation:
 
             raise OperationError(f"Invalid operation: {self.operation}")
         
+        
         try:
 
             ## Now we attempt a return

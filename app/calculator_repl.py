@@ -11,10 +11,12 @@ from app.operations import OperationFactory
 
 def calculator_repl():
 
+    calc = None
+
     try:
 
         calc = Calculator()
-        calc.add_observer(AutoSaveObserver(calc))
+        calc.add_observer(AutoSaveObserver(str(calc.config.history_file)))
         print("Calculator started. Type 'help' for commands.")
 
         while True:
@@ -109,6 +111,8 @@ def calculator_repl():
 
                 if command == "save":
 
+                    print("DEBUG SAVE history_file type:", type(calc.config.history_file), calc.config.history_file)
+
                     try:
 
                         calc.save_history()
@@ -121,6 +125,8 @@ def calculator_repl():
                     continue
 
                 if command == "load":
+
+                    print("DEBUG LOAD history_file type:", type(calc.config.history_file), calc.config.history_file)
 
                     try:
 
@@ -188,5 +194,8 @@ def calculator_repl():
     except Exception as e:
 
         print(f"Fatal error during initialization: {e}")
-        calc._send_message(40, f"Fatal error during initialization: {e}")
+        if calc is not None:
+
+            calc._send_message(40, f"Fatal error during initialization: {e}")
+
         raise
