@@ -164,3 +164,15 @@ def test_history_file_property():
     assert config.history_file == Path('/new_base_dir/history/calculator_history.csv').resolve()
 
 
+def test_history_file_resolve_failure(monkeypatch):
+    # Force Path.resolve to raise an exception when called
+    def broken_resolve(self):
+        raise RuntimeError("Simulated resolve failure")
+
+    monkeypatch.setenv('CALCULATOR_HISTORY_FILE', '/fake/path.csv')
+    monkeypatch.setattr(Path, "resolve", broken_resolve)
+
+    config = CalculatorConfig(root_dir = Path('/new_base_dir'))
+
+    with pytest.raises(ValueError, match="Invalid CALCULATOR_HISTORY_FILE path: /fake/path.csv"):
+        _ = config.history_file
