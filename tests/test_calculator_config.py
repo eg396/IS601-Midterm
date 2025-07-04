@@ -165,7 +165,6 @@ def test_history_file_property():
 
 
 def test_history_file_resolve_failure(monkeypatch):
-    # Force Path.resolve to raise an exception when called
     def broken_resolve(self):
         raise RuntimeError("Simulated resolve failure")
 
