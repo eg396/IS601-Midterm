@@ -1,3 +1,4 @@
+from pathlib import Path
 import tempfile
 from app.logger import CalculationLogger
 import pytest
@@ -111,3 +112,26 @@ def test_update_message_suite():
         call('Invalid level: 50030')
     ])
     assert logger_mock.log_error.call_count == 2
+
+def test_autosave_observer_writes_csv():
+    with tempfile.NamedTemporaryFile(suffix=".csv", delete=False) as tmp:
+        observer = AutoSaveObserver(tmp.name)
+
+        calc_mock = Mock(spec=Calculation)
+        calc_mock.operation = "add"
+        calc_mock.num1 = 1
+        calc_mock.num2 = 2
+        calc_mock.result = 3
+        calc_mock.timestamp = "2024-07-04T00:00:00"
+
+        observer.update(calc_mock)
+
+        tmp_path = Path(tmp.name)
+        assert tmp_path.exists()
+        content = tmp_path.read_text()
+        assert "add" in content
+        assert "1" in content
+        assert "2" in content
+        assert "3" in content
+
+    tmp_path.unlink()  # Remove temp file after test

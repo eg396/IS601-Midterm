@@ -2,12 +2,10 @@ import pytest
 from decimal import Decimal
 from app.calculator_config import CalculatorConfig
 from app.exceptions import ValidationError
-from app.input_validators import InputValidator  # adjust as per your file structure
+from app.input_validators import InputValidator
 
-# Sample configuration with a max input value of 1 million for testing purposes
-config = CalculatorConfig(max_input_value=Decimal('1000000'))
-
-# Test cases for InputValidator.validate_number
+config = CalculatorConfig()
+config.max_input_val = 1000000
 
 def test_validate_number_positive_integer():
     assert InputValidator.validate_number(123, config) == Decimal('123')

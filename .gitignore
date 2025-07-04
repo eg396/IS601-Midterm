@@ -13,3 +13,4 @@ venv/
 ## Ignore log as that shouldn't be shared
 
 calculator.log
+logs/calculator.log
