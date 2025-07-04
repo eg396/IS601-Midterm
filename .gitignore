@@ -22,3 +22,7 @@ logs/calculator.log
 ## Ignore coverage
 
 .coverage
+
+## Ignore test history file
+
+test_history/*
