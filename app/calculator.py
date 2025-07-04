@@ -5,6 +5,7 @@
 from decimal import Decimal
 import os
 from pathlib import Path
+import sys
 from typing import List, Optional, Union
 import pandas as pd
 
@@ -75,6 +76,7 @@ class Calculator:
             ## Update logging observer with error
 
             self._send_message(40, f"Error loading history: {e}")
+            raise e
 
         self._send_message(20, f"Calculator initialized at: {self.config.root_dir}")
 
@@ -299,3 +301,4 @@ class Calculator:
         self.history = memento.history.copy()
         
         return True
+    
