@@ -3,6 +3,7 @@
 ## Evan Garvey
 
 from decimal import Decimal
+import gc
 from typing import Any, Dict, Type
 from app.exceptions import ValidationError
 import pytest
@@ -228,6 +229,15 @@ class TestMockOperation:
             
         assert str(TestOp()) == "TestOp"
 
+    def test_name(self):
+
+        class TestOp(Operation):
+
+            def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
+
+                return num1
+            
+        assert TestOp().name == "testop"
 
 class TestOperationFactory:
 
@@ -276,3 +286,11 @@ class TestOperationFactory:
                 pass
 
             OperationFactory.register("invalid_operation", TestOp)
+
+    def test_names(self):
+
+        test_factory = OperationFactory()
+
+        for op_name, op_class in test_factory._operations.items():
+            if op_name != "test_op":
+                assert op_name == op_class().name 

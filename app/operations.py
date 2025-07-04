@@ -14,6 +14,13 @@ class Operation(ABC):
     ## This will handle what we might typically need any operation to do
     ## such as executing the operation, validating the operation, and printing the operation.
 
+    ## The name property. as __str__ was causing all sorts of hobknockery this is the way I used instead
+
+    @property
+    def name(self) -> str:
+
+        return self.__class__.__name__.lower()
+
     @abstractmethod
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
 
@@ -71,6 +78,11 @@ class Addition(Operation):
     ## Addition class
     ## For adding two numbers
 
+    @property
+    def name(self) -> str:
+
+        return "add"
+
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
         ## Executes the addition operation
@@ -89,6 +101,11 @@ class Subtraction(Operation):
 
     ## Subtraction class
     ## For subtracting two numbers
+
+    @property
+    def name(self) -> str:
+
+        return "subtract"
 
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
@@ -110,6 +127,11 @@ class Multiplication(Operation):
     ## Multiplication class
     ## For multiplying two numbers
 
+    @property
+    def name(self) -> str:
+
+        return "multiply"
+
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
         ## Executes the multiplication operation
@@ -128,6 +150,11 @@ class Division(Operation):
 
     ## Division class
     ## For dividing two numbers
+
+    @property
+    def name(self) -> str:
+
+        return "divide"
 
     def validate(self, num1: Decimal, num2: Decimal) -> None:
         
@@ -166,6 +193,11 @@ class Power(Operation):
     ## Power class
     ## For raising one number to the power of another
 
+    @property
+    def name(self) -> str:
+
+        return "power"
+
     def validate(self, num1: Decimal, num2: Decimal) -> None:
         
         ## Validates the power operation (i.e. is the exponent negative?)
@@ -199,6 +231,11 @@ class Root(Operation):
 
     ## Root class
     ## For finding the nth root of a number
+
+    @property
+    def name(self) -> str:
+
+        return "root"
 
     def validate(self, num1: Decimal, num2: Decimal) -> None:
         
@@ -240,6 +277,11 @@ class Modulo(Operation):
     ## Modulo class
     ## For finding the remainder of two numbers
 
+    @property
+    def name(self) -> str:
+
+        return "modulo"
+
     def validate(self, num1: Decimal, num2: Decimal) -> None:
         
         ## Validates the modulo operation (i.e. is the divisor 0?)
@@ -273,6 +315,11 @@ class IntegerDivision(Operation):
 
     ## IntegerDivision class
     ## For finding the integer division of two numbers
+
+    @property
+    def name(self) -> str:
+
+        return "integer division"
 
     def validate(self, num1: Decimal, num2: Decimal) -> None:
         
@@ -308,6 +355,11 @@ class PercentageCalculation(Operation):
     ## PercentageCalculation class
     ## For finding the percentage of one number with respect to another
 
+    @property
+    def name(self) -> str:
+
+        return "percentage calculation"
+
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
         ## Executes the percentage calculation
@@ -331,7 +383,10 @@ class AbsoluteDifference(Operation):
     ## AbsoluteDifference class
     ## For finding the absolute difference of two numbers
 
-    ## No special validation required here!
+    @property
+    def name(self) -> str:
+
+        return "absolute difference"
 
     def execute(self, num1: Decimal, num2: Decimal) -> Decimal:
         
