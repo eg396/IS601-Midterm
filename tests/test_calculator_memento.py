@@ -52,8 +52,12 @@ def test_calculator_memento_from_dict(monkeypatch):
 
     def fake_from_dict(calc_dict):
 
+        ## Mock Calculation.from_dict
+
         called_args.append(calc_dict)
         return calc1 if calc_dict['operation'] == 'add' else calc2
+    
+    ## Monkeypatch Calculation.from_dict
 
     monkeypatch.setattr(Calculation, "from_dict", fake_from_dict)
     memento = CalculatorMemento.from_dict(data)

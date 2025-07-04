@@ -1,24 +1,32 @@
+## test_calulator.py
+## IS 601 Midterm
+## Evan Garvey
+
 import datetime
-import os
 from pathlib import Path
-import tempfile
 from unittest import mock
 import pandas as pd
 from app.calculation import Calculation
 from app.logger import CalculationLogger
 import pytest
-from unittest.mock import MagicMock, Mock, patch, PropertyMock
+from unittest.mock import MagicMock, patch, PropertyMock
 from decimal import Decimal
 from tempfile import TemporaryDirectory
 from app.calculator import Calculator
 from app.calculator_repl import calculator_repl
 from app.calculator_config import CalculatorConfig
 from app.exceptions import OperationError, ValidationError
-from app.history import LoggingObserver, AutoSaveObserver
+from app.history import LoggingObserver
 from app.operations import Addition, OperationFactory
 
+    ## An incredible number of imports
+    ## A lot gets done here no doubt
+    
 @pytest.fixture
 def calculator():
+
+    ## calculator fixture for unit tests
+
     with TemporaryDirectory() as temp_dir:
         temp_path = Path(temp_dir)
         config = CalculatorConfig(root_dir=temp_path)
@@ -36,6 +44,10 @@ def calculator():
             yield Calculator(config=config)
 
 def test_calculator_initialization(calculator):
+
+    ## Test that the calculator is initialized correctly
+    ## This includes the history, undo_stack, redo_stack, and operation_strategy
+
     assert calculator.history == []
     assert calculator.undo_stack == []
     assert calculator.redo_stack == []
@@ -43,26 +55,41 @@ def test_calculator_initialization(calculator):
 
 @patch('app.logger.CalculationLogger.log_info')
 def test_logging_setup(mock_log_info):
+
+    ## Test that the logging is set up correctly
+
     calc = Calculator(CalculatorConfig())
     mock_log_info.assert_any_call(mock.ANY)
 
 def test_add_observer(calculator):
+
+    ## Test that an observer can be added to the calculator
+
     observer = LoggingObserver(CalculationLogger())
     calculator.add_observer(observer)
     assert observer in calculator.observers
 
 def test_remove_observer(calculator):
+
+    ## Test that an observer can be removed from the calculator
+
     observer = LoggingObserver(CalculationLogger())
     calculator.add_observer(observer)
     calculator.remove_observer(observer)
     assert observer not in calculator.observers
 
 def test_set_operation(calculator):
+
+    ## Test that an operation can be set on the calculator
+
     operation = OperationFactory.create('add')
     calculator.set_operation(operation)
     assert calculator.operation_strategy == operation
 
 def test_perform_operation_addition(calculator):
+
+    ## Test that an operation can be performed on the calculator
+
     operation = OperationFactory.create('add')
     calculator.set_operation(operation)
 
@@ -76,15 +103,25 @@ def test_perform_operation_addition(calculator):
     assert result == Decimal('5')
 
 def test_perform_operation_validation_error(calculator):
+
+    ## Test that a validation error is raised when invalid input is provided
+
     calculator.set_operation(OperationFactory.create('add'))
     with pytest.raises(ValidationError):
         calculator.perform_operation('invalid', 3)
 
 def test_perform_operation_operation_error(calculator):
+
+    ## Test that an operation error is raised when no operation is set
+
+    calculator.set_operation(None)
     with pytest.raises(OperationError, match="No operation set"):
         calculator.perform_operation(2, 3)
 
 def test_undo(calculator):
+
+    ## Test that an operation can be undone
+
     operation = OperationFactory.create('add')
     calculator.set_operation(operation)
     calculator.perform_operation(2, 3)
@@ -92,6 +129,9 @@ def test_undo(calculator):
     assert calculator.history == []
 
 def test_redo(calculator):
+
+    ## Test that an operation can be redone
+
     operation = OperationFactory.create('add')
     calculator.set_operation(operation)
     calculator.perform_operation(2, 3)
@@ -101,6 +141,9 @@ def test_redo(calculator):
 
 @patch('app.calculator.pd.DataFrame.to_csv')
 def test_save_history(mock_to_csv, calculator):
+
+    ## Test that the history can be saved
+
     operation = OperationFactory.create('add')
     calculator.set_operation(operation)
     calculator.perform_operation(2, 3)
@@ -110,6 +153,9 @@ def test_save_history(mock_to_csv, calculator):
 @patch('app.calculator.pd.read_csv')
 @patch('app.calculator.Path.exists', return_value=True)
 def test_load_history(mock_exists, mock_read_csv, calculator):
+
+    ## Test that the history can be loaded
+
     mock_read_csv.return_value = pd.DataFrame({
         'operation': ['add'],
         'num1': ['2'],
@@ -121,6 +167,8 @@ def test_load_history(mock_exists, mock_read_csv, calculator):
     try:
         calculator.load_history()
 
+        ## Check that the history is loaded correctly
+
         assert len(calculator.history) == 1
         assert calculator.history[0].operation == "add"
         assert calculator.history[0].num1 == Decimal("2")
@@ -130,6 +178,9 @@ def test_load_history(mock_exists, mock_read_csv, calculator):
         pytest.fail("Loading history failed due to OperationError")
 
 def test_clear_history(calculator):
+
+    ## Test that the history can be cleared
+
     operation = OperationFactory.create('add')
     calculator.set_operation(operation)
     calculator.perform_operation(2, 3)
@@ -141,6 +192,10 @@ def test_clear_history(calculator):
 @patch('builtins.input', side_effect=['exit'])
 @patch('builtins.print')
 def test_calculator_repl_exit(mock_print, mock_input):
+
+    ## Test that the REPL exits correctly
+    ## This includes saving the history
+
     with patch('app.calculator.Calculator.save_history') as mock_save_history:
         mock_save_history.return_value = None  
         calculator_repl()
@@ -151,24 +206,35 @@ def test_calculator_repl_exit(mock_print, mock_input):
 @patch('builtins.input', side_effect=['help', 'exit'])
 @patch('builtins.print')
 def test_calculator_repl_help(mock_print, mock_input):
+
+    ## Test that the REPL prints the help message
+
     calculator_repl()
     mock_print.assert_any_call("\nAvailable commands:")
 
 @patch('builtins.input', side_effect=['add', '2', '3', 'exit'])
 @patch('builtins.print')
 def test_calculator_repl_addition(mock_print, mock_input):
+
+    ## Test that the REPL performs an addition
+
     calculator_repl()
     mock_print.assert_any_call("Result: 5")
 
 
 def test_calculator_init_load_history_failure_raises():
+
+    ## Test that Calculator.__init__ raises an exception when load_history fails
+
     with patch.object(Calculator, 'load_history', side_effect=Exception("Load failure")):
         with pytest.raises(Exception, match="Load failure"):
             Calculator()
 
 
 def test_setup_logging_error(capsys):
+
     # Mock os.makedirs to raise an OSError
+
     with patch('os.makedirs', side_effect=OSError("mocked makedirs failure")):
         calc = Calculator.__new__(Calculator)
 
@@ -183,9 +249,14 @@ def test_setup_logging_error(capsys):
 
         captured = capsys.readouterr()
 
+        ## Check that the error message is printed
+
         assert "Error setting up logging: mocked makedirs failure" in captured.out
 
 def test_perform_operation_history_pop_minimal():
+
+    ## Test that the history pop works with 0 free slots
+    
     calc = Calculator()
     calc.config.max_history = 2
     calc.operation_strategy = Addition()
