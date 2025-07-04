@@ -14,3 +14,11 @@ venv/
 
 calculator.log
 logs/calculator.log
+
+## ignore any test csvs
+
+## test_history.csv is not used anymore. commented out
+
+## Ignore coverage
+
+.coverage
