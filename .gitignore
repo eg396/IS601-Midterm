@@ -18,6 +18,7 @@ logs/calculator.log
 ## ignore any test csvs
 
 ## test_history.csv is not used anymore. commented out
+tets_history_empty.csv
 
 ## Ignore coverage
 
