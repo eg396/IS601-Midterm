@@ -114,4 +114,18 @@ class CalculationLogger(CalculatorLogger):
         ## Returns:
         ## None
 
-        logging.log(level, message)
+        if level == 20:
+
+            logging.info(f"Info: {message}")
+
+        elif level == 30:
+
+            logging.warning(f"Warning: {message}")
+
+        elif level == 40:
+
+            logging.error(f"Error: {message}")
+
+        else:
+
+            logging.log(level, "Unexpected log level")

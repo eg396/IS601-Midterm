@@ -62,8 +62,8 @@ class LoggingObserver(HistoryObserver):
             raise AttributeError
         
         self.logger.log_info(
-            f"History updated: {calculation.operation},"
-            f"{calculation.num1}, {calculation.num2} ="
+            f"History updated: {calculation.operation}, "
+            f"({calculation.num1}, {calculation.num2}) = "
             f"{calculation.result}"
         )
 
@@ -91,8 +91,12 @@ class AutoSaveObserver(HistoryObserver):
 
     def __init__(self, csv_path: str):
 
-         self.csv_path = csv_path
-         self.df = pd.DataFrame(columns=["operation", "num1", "num2", "result", "timestamp"])
+        if csv_path is None:
+
+            raise TypeError("csv_path cannot be None")
+
+        self.csv_path = csv_path
+        self.df = pd.DataFrame(columns=["operation", "num1", "num2", "result", "timestamp"])
 
     def update(self, calculation: Calculation) -> None:
 
