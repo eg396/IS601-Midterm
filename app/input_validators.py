@@ -56,4 +56,4 @@ class InputValidator:
         
         except InvalidOperation as e:
 
-            raise ValidationError(f"Invalid number format: {e.args[0]}")
+            raise ValidationError(f"Invalid number format: {value}")

@@ -53,5 +53,5 @@ class CalculatorMemento:
 
         return cls(
             history=[Calculation.from_dict(calc) for calc in data['history']],
-            timestamp=datetime.fromisoformat(data['timestamp'])
+            timestamp=datetime.datetime.fromisoformat(data['timestamp'])
         )
