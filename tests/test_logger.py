@@ -79,3 +79,9 @@ class TestMockLogger:
         except Exception:
 
             pytest.fail("Unexpected exception raised by _log")
+
+    def test_incorrect_log_code(self):
+
+        self.logger._log(400020, "Wildly incorrect log code")
+        assert Exception
+

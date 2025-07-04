@@ -23,10 +23,12 @@ os.environ['CALCULATOR_HISTORY_FILE'] = './test_history/test_history.csv'
 os.environ['CALCULATOR_LOG_FILE'] = './test_logs/test_log.log'
 
 def clear_env_vars(*args):
+    
     for var in args:
         os.environ.pop(var, None)
 
 def test_default_configuration():
+
     config = CalculatorConfig()
     assert config.max_history == 1000
     assert config.auto_save is False
@@ -39,6 +41,7 @@ def test_default_configuration():
     assert config.log_file == Path('./test_logs/test_log.log').resolve()
 
 def test_custom_configuration():
+
     config = CalculatorConfig(
         max_history=300,
         auto_save=True,
@@ -46,6 +49,7 @@ def test_custom_configuration():
         max_input_val=Decimal("500"),
         default_encoding="ascii"
     )
+
     assert config.max_history == 300
     assert config.auto_save is True
     assert config.precision == 5
@@ -53,53 +57,63 @@ def test_custom_configuration():
     assert config.default_encoding == "ascii"
 
 def test_directory_properties():
+
     clear_env_vars('CALCULATOR_LOG_DIR', 'CALCULATOR_HISTORY_DIR')
     config = CalculatorConfig(root_dir=Path('/custom_base_dir'))
     assert config.log_dir == Path('/custom_base_dir/logs').resolve()
     assert config.history_dir == Path('/custom_base_dir/history').resolve()
 
 def test_file_properties():
+
     clear_env_vars('CALCULATOR_HISTORY_FILE', 'CALCULATOR_LOG_FILE')
     config = CalculatorConfig(root_dir=Path('/custom_base_dir'))
     assert config.history_file == Path('/custom_base_dir/history/calculator_history.csv').resolve()
     assert config.log_file == Path('/custom_base_dir/logs/calculator.log').resolve()
 
 def test_invalid_max_history_size():
+
     with pytest.raises(ConfigurationError, match="Max history must be greater than 0"):
         config = CalculatorConfig(max_history=-1)
         config.validate()
 
 def test_invalid_precision():
+
     with pytest.raises(ConfigurationError, match="Precision must be greater than 0"):
         config = CalculatorConfig(precision=-1)
         config.validate()
 
 def test_invalid_max_input_value():
+    
     with pytest.raises(ConfigurationError, match="Max input value must be greater than 0"):
         config = CalculatorConfig(max_input_val=Decimal("-1"))
         config.validate()
 
 def test_auto_save_env_var_true():
+
     os.environ['CALCULATOR_AUTO_SAVE'] = 'true'
     config = CalculatorConfig(auto_save=None)
     assert config.auto_save is True
 
 def test_auto_save_env_var_one():
+
     os.environ['CALCULATOR_AUTO_SAVE'] = '1'
     config = CalculatorConfig(auto_save=None)
     assert config.auto_save is True
 
 def test_auto_save_env_var_false():
+
     os.environ['CALCULATOR_AUTO_SAVE'] = 'false'
     config = CalculatorConfig(auto_save=None)
     assert config.auto_save is False
 
 def test_auto_save_env_var_zero():
+
     os.environ['CALCULATOR_AUTO_SAVE'] = '0'
     config = CalculatorConfig(auto_save=None)
     assert config.auto_save is False
 
 def test_environment_overrides():
+
     config = CalculatorConfig()
     assert config.max_history == 1000
     assert config.auto_save is False
@@ -108,7 +122,7 @@ def test_environment_overrides():
     assert config.default_encoding == 'utf-16'
 
 def test_default_fallbacks():
-    # Clear all related environment variables and test default values
+
     clear_env_vars(
         'CALCULATOR_MAX_HISTORY', 'CALCULATOR_AUTO_SAVE', 'CALCULATOR_PRECISION',
         'CALCULATOR_MAX_INPUT_VAL', 'CALCULATOR_DEFAULT_ENCODING'
