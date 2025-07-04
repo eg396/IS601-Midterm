@@ -15,7 +15,7 @@ from app.exceptions import OperationError, ValidationError
 from app.history import HistoryObserver, LoggingObserver
 from app.input_validators import InputValidator
 from app.logger import CalculationLogger
-from app.operations import Operation
+from app.operations import Operation, OperationFactory
 
 ## Definining type aliases that we will be using often
 
@@ -37,13 +37,17 @@ class Calculator:
         ## Returns:
         ## None
 
+        ## Initialize the observers first
+
+        self.observers: List[HistoryObserver] = []
+
         if config is None:
 
             ## if no config provided, find the project root directory
 
             current_file = Path(__file__)
             project_root = current_file.parent.parent
-            config = CalculatorConfig(base_dir = project_root)
+            config = CalculatorConfig(root_dir = project_root)
 
         ## initialize the config and validate
 
@@ -54,13 +58,11 @@ class Calculator:
 
         self._setup_logging()
 
-        self.history = List[Calculation] = []
+        self.history: List[Calculation] = []
         self.operation_strategy: Optional[Operation] = None
 
-        self.observers = List[HistoryObserver] = []
-
-        self.undo_stack = List[CalculatorMemento] = []
-        self.redo_stack = List[CalculatorMemento] = []
+        self.undo_stack: List[CalculatorMemento] = []
+        self.redo_stack: List[CalculatorMemento] = []
 
         self._setup_directories()
 
@@ -141,10 +143,12 @@ class Calculator:
 
             result = self.operation_strategy.execute(validated_str1, validated_str2)
 
+            operation_name = None
+
             calculation = Calculation(
-                operation = str(self.operation_strategy),
+                operation = self.operation_strategy.name,
                 num1 = validated_str1,
-                num2 = validated_str2,
+                num2 = validated_str2
             )
 
             self.undo_stack.append(CalculatorMemento(self.history.copy()))
@@ -164,10 +168,12 @@ class Calculator:
         except ValidationError as e:
 
             self._send_message(40, f"Validation Error: {e}")
+            raise
 
         except Exception as e:
 
             self._send_message(40, f"Operation Failed: {e}")
+            raise
 
     def save_history(self) -> None:
 
@@ -189,7 +195,8 @@ class Calculator:
 
             if history_data:
 
-                df = pd.Dataframe(history_data)
+                df = pd.DataFrame(history_data)
+                print("DEBUG history_file type:", type(self.config.history_file), self.config.history_file)
                 df.to_csv(self.config.history_file, index = False)
 
                 self._send_message(20, f"History saved to: {self.config.history_file}")
