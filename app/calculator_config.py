@@ -74,7 +74,7 @@ class CalculatorConfig:
 
         ## Max history
 
-        self.max_history = max_history or Path(
+        self.max_history = max_history or int(
             os.getenv('CALCULATOR_MAX_HISTORY', '1000')
         )
 
