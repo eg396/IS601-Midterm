@@ -60,17 +60,17 @@ Actions are already implemented into Git - They automatically check for test cov
 - Implement arithmetic calculations [Done]
 - History management with undo & redo [Done]
 - Observer pattern for logging & auto-saving [Done]
-- Configuration management [50% Done]
-- Error handling & input validation 
+- Configuration management [Done]
+- Error handling & input validation [Done]
 - Logging [Done]
 - Command line REPL interface [Done]
-- Unit testing
+- Unit testing [Done]
 - Serialization & data persistence [Done]
-- GitHub actions for CI/CD
-- Documentation
+- GitHub actions for CI/CD [Done]
+- Documentation [Done]
 
 ## Optional TODO
 
 - Dynamic help menu using Decorator Design Pattern
-- Color-Coded outputs
+- Color-Coded outputs [Done]
 - Additional Design Patterns
