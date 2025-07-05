@@ -198,7 +198,6 @@ class Calculator:
             if history_data:
 
                 df = pd.DataFrame(history_data)
-                print("DEBUG history_file type:", type(self.config.history_file), self.config.history_file)
                 df.to_csv(self.config.history_file, index = False)
 
                 self._send_message(20, f"History saved to: {self.config.history_file}")
