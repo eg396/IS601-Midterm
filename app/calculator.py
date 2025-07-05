@@ -267,7 +267,7 @@ class Calculator:
     def show_history(self) -> List[str]:
 
         return [ 
-            f"{calc.operation} ({calc.num1}m {calc.num2}) = {calc.result}" for calc in self.history
+            f"{calc.operation} ({calc.num1} {calc.num2}) = {calc.result}" for calc in self.history
         ]
     
     def clear_history(self) -> None:
