@@ -23,7 +23,7 @@ def calculator_repl():
 
             try:
 
-                command = input("\nEnter command:").lower().strip()
+                command = input("\nEnter command: ").lower().strip()
 
                 if command == 'help':
 
@@ -119,6 +119,19 @@ def calculator_repl():
                     except Exception as e:
 
                         print(f"Error saving history: {e}")
+
+                    continue
+
+                if command == "load":
+
+                    try:
+
+                        calc.load_history()
+                        print("History loaded from file successfully.")
+
+                    except Exception as e:
+
+                        print(f"Error loading history: {e}")
 
                     continue
 

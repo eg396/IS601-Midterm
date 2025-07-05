@@ -217,6 +217,44 @@ def test_repl_save_error(capsys):
         assert "Error saving history: mock save failure" in captured.out
         assert "Goodbye!" in captured.out
 
+def test_repl_load_success(capsys):
+    # Simulate user typing "load" then "exit"
+    inputs = ["load", "exit"]
+    input_mock = lambda _: inputs.pop(0)
+
+    with patch("app.calculator_repl.Calculator") as MockCalculator:
+        inst = MockCalculator.return_value
+        # load_history succeeds
+        inst.load_history = MagicMock()
+        inst.save_history = MagicMock()
+        inst.add_observer = MagicMock()
+
+        with patch.object(builtins, "input", side_effect=input_mock):
+            calculator_repl()
+
+        out = capsys.readouterr().out
+        assert "History loaded from file successfully." in out
+        assert "Goodbye!" in out
+
+def test_repl_load_error(capsys):
+    # Simulate user typing "load" then "exit"
+    inputs = ["load", "exit"]
+    input_mock = lambda _: inputs.pop(0)
+
+    with patch("app.calculator_repl.Calculator") as MockCalculator:
+        inst = MockCalculator.return_value
+        # load_history raises
+        inst.load_history.side_effect = Exception("mock load error")
+        inst.save_history = MagicMock()
+        inst.add_observer = MagicMock()
+
+        with patch.object(builtins, "input", side_effect=input_mock):
+            calculator_repl()
+
+        out = capsys.readouterr().out
+        assert "Error loading history: mock load error" in out
+        assert "Goodbye!" in out
+
 class CancelStr(str):
     @property
     def lower(self):
