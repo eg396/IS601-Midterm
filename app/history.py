@@ -8,6 +8,7 @@ from abc import ABC, abstractmethod
 import logging
 from typing import Any
 import pandas as pd
+import warnings
 
 from app.calculation import Calculation
 from app.logger import CalculationLogger
@@ -125,7 +126,9 @@ class AutoSaveObserver(HistoryObserver):
             "timestamp": calculation.timestamp
         }])
 
-        self.df = pd.concat([self.df, new_row], ignore_index=True)
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", FutureWarning)
+            self.df = pd.concat([self.df, new_row], ignore_index=True) # 
 
         ## Save the dataframe to the file
 
