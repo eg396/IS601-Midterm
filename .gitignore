@@ -10,11 +10,6 @@ venv/
 
 .env
 
-## Ignore log as that shouldn't be shared
-
-calculator.log
-logs/calculator.log
-
 ## ignore any test csvs
 
 ## test_history.csv is not used anymore. commented out
