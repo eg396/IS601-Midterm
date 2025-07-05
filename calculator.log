@@ -1,0 +1,426 @@
+2025-07-03 13:53:23,706 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:21:39,895 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:21:39,899 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:29:11,325 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:29:11,331 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:31:20,574 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:32:39,966 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:32:59,490 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:32:59,492 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:33:10,096 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:33:10,098 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:36:07,477 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:36:07,479 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:36:23,359 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:40:17,528 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:40:17,531 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:42:07,087 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:44:18,518 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:46:44,811 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:47:49,107 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:48:07,371 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:48:27,589 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:49:43,721 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:50:47,979 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:51:56,229 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:52:19,069 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:53:57,403 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:54:37,926 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:57:22,078 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:57:22,085 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 14:57:22,085 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 14:58:41,637 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:58:41,645 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 14:58:41,645 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 14:59:16,318 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:59:16,325 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 14:59:16,325 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 14:59:38,669 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 14:59:38,677 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 14:59:38,677 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 14:59:38,679 - INFO - Test message
+2025-07-03 15:03:10,318 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 15:03:10,325 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 15:03:10,325 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 15:03:10,327 - INFO - Test message
+2025-07-03 15:05:17,255 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 15:05:17,262 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 15:05:17,262 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 15:07:22,493 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 15:07:22,500 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 15:07:22,501 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 15:07:22,503 - INFO - Test info message
+2025-07-03 15:07:22,503 - WARNING - Test warning message
+2025-07-03 15:07:22,503 - ERROR - Test error message
+2025-07-03 15:09:29,223 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 15:09:29,230 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 15:09:29,230 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 15:09:29,232 - INFO - Test info message
+2025-07-03 15:09:29,232 - WARNING - Test warning message
+2025-07-03 15:09:29,232 - ERROR - Test error message
+2025-07-03 17:32:30,161 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:32:30,169 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:32:30,169 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:32:30,171 - INFO - Test info message
+2025-07-03 17:32:30,171 - WARNING - Test warning message
+2025-07-03 17:32:30,171 - ERROR - Test error message
+2025-07-03 17:32:33,137 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:32:33,144 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:32:33,144 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:32:33,146 - INFO - Test info message
+2025-07-03 17:32:33,146 - WARNING - Test warning message
+2025-07-03 17:32:33,146 - ERROR - Test error message
+2025-07-03 17:38:55,364 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:38:55,372 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:38:55,372 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:38:55,374 - INFO - Test info message
+2025-07-03 17:38:55,374 - WARNING - Test warning message
+2025-07-03 17:38:55,374 - ERROR - Test error message
+2025-07-03 17:39:45,143 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:39:45,151 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:39:45,151 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:39:45,153 - INFO - Test info message
+2025-07-03 17:39:45,153 - WARNING - Test warning message
+2025-07-03 17:39:45,153 - ERROR - Test error message
+2025-07-03 17:40:22,386 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:40:22,395 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:40:22,395 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:40:22,398 - INFO - Test info message
+2025-07-03 17:40:22,398 - WARNING - Test warning message
+2025-07-03 17:40:22,398 - ERROR - Test error message
+2025-07-03 17:43:01,589 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:43:01,597 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:43:01,597 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:43:01,599 - INFO - Test info message
+2025-07-03 17:43:01,599 - WARNING - Test warning message
+2025-07-03 17:43:01,599 - ERROR - Test error message
+2025-07-03 17:46:21,683 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:46:21,690 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:46:21,690 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:46:21,693 - INFO - Test info message
+2025-07-03 17:46:21,693 - WARNING - Test warning message
+2025-07-03 17:46:21,693 - ERROR - Test error message
+2025-07-03 17:47:03,209 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:47:03,216 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:47:03,216 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:47:03,218 - INFO - Test info message
+2025-07-03 17:47:03,218 - WARNING - Test warning message
+2025-07-03 17:47:03,218 - ERROR - Test error message
+2025-07-03 17:47:54,446 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:47:54,454 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:47:54,454 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:47:54,455 - INFO - Test info message
+2025-07-03 17:47:54,455 - WARNING - Test warning message
+2025-07-03 17:47:54,456 - ERROR - Test error message
+2025-07-03 17:48:17,003 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:48:17,010 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:48:17,010 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:48:17,012 - INFO - Test info message
+2025-07-03 17:48:17,012 - WARNING - Test warning message
+2025-07-03 17:48:17,012 - ERROR - Test error message
+2025-07-03 17:48:26,212 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:48:26,220 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:48:26,220 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:48:26,222 - INFO - Test info message
+2025-07-03 17:48:26,222 - WARNING - Test warning message
+2025-07-03 17:48:26,222 - ERROR - Test error message
+2025-07-03 17:49:41,363 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:49:41,373 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:49:41,373 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:49:41,375 - INFO - Test info message
+2025-07-03 17:49:41,375 - WARNING - Test warning message
+2025-07-03 17:49:41,375 - ERROR - Test error message
+2025-07-03 17:59:56,974 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 17:59:56,981 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 17:59:56,981 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 17:59:56,983 - INFO - Test info message
+2025-07-03 17:59:56,983 - WARNING - Test warning message
+2025-07-03 17:59:56,983 - ERROR - Test error message
+2025-07-03 18:01:02,099 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 18:01:02,106 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 18:01:02,106 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 18:01:02,108 - INFO - Test info message
+2025-07-03 18:01:02,108 - WARNING - Test warning message
+2025-07-03 18:01:02,108 - ERROR - Test error message
+2025-07-03 19:49:10,828 - INFO - Logging initialized at: /home/egarveybk/projects/midterm-calculator/calculator.log
+2025-07-03 19:49:10,835 - WARNING - Failed to configure file logging. Using fallback console logger.
+2025-07-03 19:49:10,835 - ERROR - Mock logging failure
+Traceback (most recent call last):
+  File "/home/egarveybk/projects/midterm-calculator/app/logger.py", line 83, in setup_logging
+    logging.basicConfig(
+  File "/usr/lib/python3.12/unittest/mock.py", line 1134, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1138, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/unittest/mock.py", line 1197, in _execute_mock_call
+    raise result
+Exception: Mock logging failure
+2025-07-03 19:49:10,837 - INFO - Test info message
+2025-07-03 19:49:10,837 - WARNING - Test warning message
+2025-07-03 19:49:10,837 - ERROR - Test error message
